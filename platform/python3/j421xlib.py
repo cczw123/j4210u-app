@@ -237,7 +237,7 @@ class J4210():
         # REM: All the drivers should be in path or in currect dir
         self.lib = None
         if (platform.system() == 'Windows'):
-            self.lib = cdll.LoadLibrary('j4210u.dll')
+            self.lib = cdll.LoadLibrary('C:/unityprojects/j4210u-app/platform/win64/j4210u.dll')
         elif (platform.system() == 'Linux'):
             self.lib = cdll.LoadLibrary('libj4210u.so')
         elif (platform.system() == 'Mac OS X'):
