@@ -40,6 +40,7 @@ import os
 import platform
 import binascii
 import enum
+import sys
 
 class TagType(enum.Enum):
         UNKNOWN = 0
@@ -239,7 +240,7 @@ class J4210():
         if (platform.system() == 'Windows'):
             self.lib = cdll.LoadLibrary('C:/unityprojects/j4210u-app/platform/win64/j4210u.dll')
         elif (platform.system() == 'Linux'):
-            self.lib = cdll.LoadLibrary('libj4210u.so')
+            self.lib = cdll.LoadLibrary('./linux64.so')
         elif (platform.system() == 'Mac OS X'):
             self.lib = cdll.LoadLibrary('libj4210u.dylib')
         lib = self.lib

@@ -25,6 +25,7 @@
 
 
 import j421xlib
+import requests
 
 def Test():
     # create a Geek class object
@@ -193,4 +194,46 @@ def Test():
 
     print("DONE!")
 
-Test()
+def Test2():
+    f = j421xlib.J4210()
+
+    # object method calling
+    ports = f.AvailablePorts()
+   
+    # connect to device
+    ret = f.OpenPort(ports[0], 57600)
+    assert ret != False
+
+    # get driver version
+    ver = f.LibVersion()
+
+   
+
+
+    # inventory
+    print("Performing Inventory:")
+    q = 5
+    ret = f.SetQ(q) # Q is 0 to 15
+    assert ret == False
+    sess = 0
+    ret = f.SetSession(sess)
+    assert ret == False
+    n = f.Inventory(False) # inventory witout filtering
+    print("Tags found: ", n)
+
+    # list inventory
+    print("Tag List:")
+    for i in range(n):
+        sr = f.GetResult(i)
+        #sr.echo()
+        sr.line()
+
+        
+        url = 'https://www.songshujuran.com/record'
+        form_data = {'key': 'p_mnMjRY9cgzNIJsLEWZyjdrKOSDtXsb1raHXU','id':sr.line()}
+        server = requests.post(url, data=form_data)
+        output = server.text
+
+
+
+Test2()
